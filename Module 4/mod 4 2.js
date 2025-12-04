@@ -1,11 +1,17 @@
 const Form = document.querySelector("form")
-Form.addEventListener('submit', async function(evt){
+Form.addEventListener('submit', async function(evt) {
 
     evt.preventDefault()
 
-    const search= document.querySelector("query");
+    const query = document.querySelector("#query").value;
+    try {
+        const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
+        const jsonData = await response.json();
+        console.log(jsonData);
+    } catch(error){
+        console.log(error.message);
+    }
+});
 
-    const submit = document.querySelector("search");
-    const response = await fetch("https://api.tvmaze.com/search/shows");
-    const jsonData = await reponse.json();
-    console.log(jsonData);
+
+
